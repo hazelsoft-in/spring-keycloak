@@ -28,6 +28,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/users/**").hasRole(USER)
                         .requestMatchers(HttpMethod.POST, "/users/**").hasRole(USER)
                         .requestMatchers(HttpMethod.GET, "/all/**").hasAnyRole(ADMIN,USER)
+                        .requestMatchers(HttpMethod.GET, "/actuator/health").permitAll()
                         .anyRequest().authenticated());
 
         http.sessionManagement(sess -> sess.sessionCreationPolicy(
