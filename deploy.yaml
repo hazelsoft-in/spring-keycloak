@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-keycloak
+  labels:
+    app: spring-keycloak
+spec:
+  selector:
+    matchLabels:
+      app: spring-keycloak
+  template:
+    metadata:
+      labels:
+        app: spring-keycloak
+    spec:
+      securityContext:
+        runAsUser: 1000
+      containers:
+        - name: spring-keycloak
+          image: sandeeplv/spring-keycloak:v1
+          #imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 9
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 9
+            periodSeconds: 3
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-keycloak-service
+  labels:
+    app: spring-keycloak-service
+spec:
+  selector:
+    app: spring-keycloak
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
