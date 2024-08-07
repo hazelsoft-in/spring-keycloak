@@ -22,12 +22,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authz) ->
-                authz.requestMatchers(HttpMethod.GET, "/api/hello").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/admins/**").hasRole(ADMIN)
-                        .requestMatchers(HttpMethod.POST, "/api/admins/**").hasRole(ADMIN)
-                        .requestMatchers(HttpMethod.GET, "/api/users/**").hasRole(USER)
-                        .requestMatchers(HttpMethod.POST, "/api/users/**").hasRole(USER)
-                        .requestMatchers(HttpMethod.GET, "/api/all/**").hasAnyRole(ADMIN,USER)
+                authz.requestMatchers(HttpMethod.GET, "/hello").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admins/**").hasRole(ADMIN)
+                        .requestMatchers(HttpMethod.POST, "/admins/**").hasRole(ADMIN)
+                        .requestMatchers(HttpMethod.GET, "/users/**").hasRole(USER)
+                        .requestMatchers(HttpMethod.POST, "/users/**").hasRole(USER)
+                        .requestMatchers(HttpMethod.GET, "/all/**").hasAnyRole(ADMIN,USER)
                         .anyRequest().authenticated());
 
         http.sessionManagement(sess -> sess.sessionCreationPolicy(
