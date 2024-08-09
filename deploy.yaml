@@ -17,7 +17,7 @@ spec:
         runAsUser: 1000
       containers:
         - name: spring-keycloak
-          image: sandeeplv/spring-keycloak:v1
+          image: sandeeplv/spring-keycloak:v12
           #imagePullPolicy: Never
           ports:
             - containerPort: 8080
