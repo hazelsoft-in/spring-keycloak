@@ -23,11 +23,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authz) ->
                 authz.requestMatchers(HttpMethod.GET, "/hello").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/admins/**").hasRole(ADMIN)
-                        .requestMatchers(HttpMethod.POST, "/admins/**").hasRole(ADMIN)
-                        .requestMatchers(HttpMethod.GET, "/users/**").hasRole(USER)
-                        .requestMatchers(HttpMethod.POST, "/users/**").hasRole(USER)
-                        .requestMatchers(HttpMethod.GET, "/all/**").hasAnyRole(ADMIN,USER)
+                        .requestMatchers(HttpMethod.GET, "/admins").hasRole(ADMIN)
+                        .requestMatchers(HttpMethod.POST, "/admins").hasRole(ADMIN)
+                        .requestMatchers(HttpMethod.GET, "/users").hasRole(USER)
+                        .requestMatchers(HttpMethod.POST, "/users").hasRole(USER)
+                        .requestMatchers(HttpMethod.GET, "/all").hasAnyRole(ADMIN,USER)
                         .requestMatchers(HttpMethod.GET, "/actuator/health").permitAll()
                         .anyRequest().authenticated());
 
